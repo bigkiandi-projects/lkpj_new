@@ -8,8 +8,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 class Auth extends CI_Controller {
 
-	public function index()
-	{
+	public function index() {
 		if ($this->session->userdata('login')) {
 			redirect('dashboard','refresh');
 		}
