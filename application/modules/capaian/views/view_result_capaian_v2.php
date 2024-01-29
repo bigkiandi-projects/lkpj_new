@@ -100,6 +100,9 @@ function fetch_prog($cp, $kdOpd) {
                 <td></td>
                 <td></td>";
         echo    "<td width='70'>
+                    <div class='btn-group'>
+                        <a data-href='".base_url('capaian/hapus_cp/').$prg->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
+                    </div>
                 </td>";
         echo    "</tr>";
 
@@ -132,6 +135,9 @@ function fetch_keg($cp, $kd){
                 <td></td>
                 <td></td>";
         echo    "<td width='70'>
+                    <div class='btn-group'>
+                        <a data-href='".base_url('capaian/hapus_cp/').$kgt->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
+                    </div>
                 </td>";
         echo    "</tr>";
 
