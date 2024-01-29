@@ -184,30 +184,7 @@ $cariString = strtoupper($this->session->userdata('nama_user'));
 $find = cariObjek($opdd, $cariString);
 
 // export to excel
-function get_data($cp) {
-    // Lokasi file spreadsheet yang sudah ada
-    $file_path = './assets/upload/file_spreadsheet_updated.xlsx';
 
-    // Baca file spreadsheet yang sudah ada
-    $spreadsheet = IOFactory::load($file_path);
-
-    // Dapatkan lembar aktif (active sheet)
-    $sheet = $spreadsheet->getActiveSheet();
-
-    $highestRow = $sheet->getHighestRow(); 
-    $highestColumn = $sheet->getHighestColumn();
-
-    $dataArray = $sheet
-    ->rangeToArray(
-        'A9:'. $highestColumn . $highestRow,     // The worksheet range that we want to retrieve
-        NULL,        // Value that should be returned for empty cells
-        TRUE,        // Should formulas be calculated (the equivalent of getCalculatedValue() for each cell)
-        FALSE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)
-        FALSE         // Should the array be indexed by cell row and cell column
-    );
-
-    return $dataArray;
-}
 
 }
 

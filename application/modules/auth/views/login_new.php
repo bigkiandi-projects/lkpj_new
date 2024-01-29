@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache" />
     <title>E-LKPJ Sentara Terintegrasi</title>
     <link rel="shortcut icon" href="<?= base_url('assets/favicon.ico') ?>" type="image/x-icon">
     <link rel="icon" href="<?= base_url('assets/favicon.ico') ?>" type="image/x-icon">
@@ -228,8 +229,8 @@
 
                     <form method="post">
 	                    <div class="row px-3">
-	                        <label class="mb-1"><h6 class="mb-0 text-sm">Username / Email</h6></label>
-	                        <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address" required autocomplete="off">
+	                        <label class="mb-1"><h6 class="mb-0 text-sm">Username</h6></label>
+	                        <input class="mb-4" type="text" name="email" placeholder="Enter your username" required autocomplete="off">
 	                    </div>
 	                    <div class="row px-3">
 	                        <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
