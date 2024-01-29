@@ -60,7 +60,7 @@ class Auth extends CI_Controller {
 
 	public function logout($value='')
 	{
-		$this->session->sess_destroy();
+		session_destroy();
 		redirect('login','refresh');
 	}
 
