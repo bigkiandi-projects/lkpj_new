@@ -206,7 +206,7 @@
                     <div class="row mb-4 px-3">
                         <h4 class="mb-0 mr-4 mt-2">Selamat Datang</h4>
                         <p><strong>Senjata Terintegrasi</strong> merupakan akronim dari Sistem Penyusunan Laporan Pertanggungjawaban Bupati Terintegrasi. Penyusunan <strong>Laporan Capaian Kinerja</strong> untuk masing-masing OPD, serta penyampaian <strong>Data Pendukung LKPJ</strong> lainnya, di lakukan secara elektronik.</p>
-                        <p><?= $this->session->userdata('nama_user') ?></p>
+                        <h1><?= $this->session->userdata('id_user') ?></h1>
                     </div>
                     <div class="row px-3 mb-4">
                         <div class="line"></div>
