@@ -1,0 +1,19 @@
+.info-card h4 {
+        font-weight: bold;
+        font-size: 25px;
+}
+.info-app {
+        font-size: 15px;
+        padding: 2px;
+        border: 1px solid #dfdfdf;
+}
+.red {
+        background-color: #FFB3B3;
+}
+.yellow {
+/*      background-color: #dcabfe;*/
+        background-color: #F5F5DC;
+}
+.green {
+
+}
