@@ -62,7 +62,7 @@ class Auth extends CI_Controller {
 	{
 		$this->session->unset_userdata('login');
 		session_destroy();
-		redirect('login','refresh');
+		redirect('login','refresh')->deleteCookie('auth');
 	}
 
 	private function _send_email($token, $email)
