@@ -1,5 +1,5 @@
 <?php
-if($this->session->userdata('login')) {
+if($this->session->userdata('login') === true) {
 
 $this->db->join('role', 'id_role', 'left');
 $user = $this->db->get_where('user',['id_user' => $this->session->userdata('id_user')])->row_array(); 
@@ -7,6 +7,7 @@ if (!$user) {
   $this->session->sess_destroy();
   redirect('login','refresh');
 }
+
 }
 ?>
 <!DOCTYPE html>
