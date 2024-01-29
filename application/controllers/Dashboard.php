@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		
+		cek_login();
 		
 		$data['judul'] = "Dashboard";
 
