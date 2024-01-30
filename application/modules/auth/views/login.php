@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>e-lkpj kabupaten seram bagian barat.</title>
+  <meta name="description" content="Sistem penyusunan laporan pertanggungjawaban bupati terintegrasi secara elektronik E-LKPJ" itemprop="description" />
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Masuk</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="elkpj-sbbkab.com" />
+  <meta property="og:title" content="elkpj - Kabupaten Seram Bagian Barat" />
+  <meta property="og:image" content="<?= base_url('assets/img/og-logo.jpg') ?>" />
+  <meta property="og:description" content="Sistem penyusunan laporan pertanggungjawaban bupati terintegrasi secara elektronik E-LKPJ" />
+  <meta property="og:url" content="<?php echo base_url() ?>" />
+
+        
+  <meta content="data adalah prasyarat penting untuk mewujudkan data-driven organization; dimana segala keputusan, kebijakan, dan tindakan didasarkan pada data, bukti, dan informasi yang akurat dan kuat" itemprop="headline" />
+  <meta name="keywords" content="e-lkpj sistem penyusunan laporan pertanggungjawaban bupati terintegrasi" itemprop="keywords" />
+  <meta name="thumbnailUrl" content="<?= base_url('assets/img/og-logo.jpg') ?>" itemprop="thumbnailUrl" />
+
   <!-- Bootstrap 3.3.7 -->
   <link rel="icon" href="<?php echo base_url('assets/img/favicon.png') ?>" />
   <link rel="stylesheet" href="<?php echo base_url('vendor/lte/') ?>bower_components/bootstrap/dist/css/bootstrap.min.css">

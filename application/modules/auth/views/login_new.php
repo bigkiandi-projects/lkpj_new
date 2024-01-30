@@ -2,12 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache" />
-    <title>E-LKPJ Sentara Terintegrasi</title>
-    <link rel="shortcut icon" href="<?= base_url('assets/favicon.ico') ?>" type="image/x-icon">
-    <link rel="icon" href="<?= base_url('assets/favicon.ico') ?>" type="image/x-icon">
+    <title>e-lkpj kabupaten seram bagian barat.</title>
+  <meta name="description" content="Sistem penyusunan laporan pertanggungjawaban bupati terintegrasi secara elektronik E-LKPJ" itemprop="description" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="elkpj-sbbkab.com" />
+  <meta property="og:title" content="elkpj - Kabupaten Seram Bagian Barat" />
+  <meta property="og:image" content="<?= base_url('assets/img/og-logo.jpg') ?>" />
+  <meta property="og:description" content="Sistem penyusunan laporan pertanggungjawaban bupati terintegrasi secara elektronik E-LKPJ" />
+  <meta property="og:url" content="<?php echo base_url() ?>" />
+
+        
+  <meta content="data adalah prasyarat penting untuk mewujudkan data-driven organization; dimana segala keputusan, kebijakan, dan tindakan didasarkan pada data, bukti, dan informasi yang akurat dan kuat" itemprop="headline" />
+  <meta name="keywords" content="e-lkpj sistem penyusunan laporan pertanggungjawaban bupati terintegrasi" itemprop="keywords" />
+  <meta name="thumbnailUrl" content="<?= base_url('assets/img/og-logo.jpg') ?>" itemprop="thumbnailUrl" />
+  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
