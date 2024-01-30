@@ -380,11 +380,11 @@ $config['encryption_key'] = 'randomstring';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_sessions';
-$config['sess_expiration'] = 300;
+$config['sess_expiration'] = 7200;
 $config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -401,7 +401,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
+$config['cookie_prefix']	= 'sj_';
 $config['cookie_domain'] = ($_SERVER['SERVER_NAME'] == 'localhost' ? '' : preg_replace('/^www\./', '', $_SERVER['SERVER_NAME']));
 $config['cookie_path'] = BASE_URI;
 $config['cookie_secure']	= FALSE;
