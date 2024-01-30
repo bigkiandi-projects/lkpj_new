@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>e-lkpj kabupaten seram bagian barat.</title>
+    <title>E-lkpj Kabupaten Seram Bagian Barat</title>
   <meta name="description" content="Sistem Penyusunan Laporan Pertanggungjawaban Bupati Terintegrasi Secara Elektronik (E-LKPJ). Pemerintah Kabupaten Seram Bagian Barat." itemprop="description" />
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="text/html; charset=UTF-8" />
@@ -11,7 +11,7 @@
 
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="elkpj-sbbkab.com" />
-  <meta property="og:title" content="elkpj - Kabupaten Seram Bagian Barat" />
+  <meta property="og:title" content="E-lkpj Kabupaten Seram Bagian Barat" />
   <meta property="og:image" content="<?= base_url('assets/img/og-logo.jpg') ?>" />
   <meta property="og:description" content="Sistem Penyusunan Laporan Pertanggungjawaban Bupati Terintegrasi Secara Elektronik (E-LKPJ). Pemerintah Kabupaten Seram Bagian Barat." />
   <meta property="og:url" content="<?php echo base_url() ?>" />
