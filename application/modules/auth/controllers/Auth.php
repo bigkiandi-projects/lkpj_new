@@ -58,8 +58,6 @@ class Auth extends CI_Controller {
 	}
 
 	public function logout($value='') {
-
-		$this->session->unset_userdata('login' => false);
 		session_destroy();
 		redirect('login','refresh')->deleteCookie('auth');
 	}
