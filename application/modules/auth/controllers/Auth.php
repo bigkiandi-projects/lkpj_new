@@ -30,7 +30,7 @@ class Auth extends CI_Controller {
 				if (password_verify($post['password'], $user['password'])) {
 
 					$session = [
-						'login' => true,
+						'masuk' => true,
 						'id_user' => $user['id_user'],
 						'id_role' => $user['id_role'],
 						'nama_user' => $user['nama_user'],

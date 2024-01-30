@@ -3,7 +3,7 @@
 function cek_login()
 {
 	$ci = get_instance();
-	if ($ci->session->userdata('login') !== TRUE) {
+	if ($ci->session->userdata('masuk') !== true) {
 		redirect('login');
 	} else {
 
