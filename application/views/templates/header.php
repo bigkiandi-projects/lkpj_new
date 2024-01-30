@@ -1,7 +1,11 @@
 <?php
 
 $this->db->join('role', 'id_role', 'left');
-$user = $this->db->get_where('user',['id_user' => $this->session->userdata('id_user')])->row_array();
+$user = $this->db->get_where('user',['id_user' => $this->session->userdata('id_user')])->row_array(); 
+if (!$user) {
+  session_destroy();
+  redirect('login','refresh')->deleteCookie('auth');
+}
 
 ?>
 <!DOCTYPE html>
