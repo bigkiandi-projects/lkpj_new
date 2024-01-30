@@ -12,14 +12,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="elkpj-sbbkab.com" />
   <meta property="og:title" content="E-lkpj Kabupaten Seram Bagian Barat" />
-  <meta property="og:image" content="<?= base_url('assets/img/og-logo.jpg') ?>" />
+  <meta property="og:image" content="<?= base_url('assets/img/icon.png') ?>" />
   <meta property="og:description" content="Sistem Penyusunan Laporan Pertanggungjawaban Bupati Terintegrasi Secara Elektronik (E-LKPJ). Pemerintah Kabupaten Seram Bagian Barat." />
   <meta property="og:url" content="<?php echo base_url() ?>" />
 
         
   <meta content="data adalah prasyarat penting untuk mewujudkan data-driven organization; dimana segala keputusan, kebijakan, dan tindakan didasarkan pada data, bukti, dan informasi yang akurat dan kuat" itemprop="headline" />
   <meta name="keywords" content="e-lkpj sistem penyusunan laporan pertanggungjawaban bupati terintegrasi" itemprop="keywords" />
-  <meta name="thumbnailUrl" content="<?= base_url('assets/img/og-logo.jpg') ?>" itemprop="thumbnailUrl" />
+  <meta name="thumbnailUrl" content="<?= base_url('assets/img/icon.png') ?>" itemprop="thumbnailUrl" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
