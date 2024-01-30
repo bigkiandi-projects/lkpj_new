@@ -23,7 +23,7 @@
       <div class="box-body text-center">
         <h4>REALISASI CAPAIAN PEMERINTAH KABUPATEN SERAM BAGIAN BARAT</h4>
         <h4>TAHUN ANGGARAN <?= $this->session->userdata('ta') ?></h4>
-        <h4><?= $this->session->userdata('nama_user') ?></h4>
+
       </div>
 
       <div class="row">
