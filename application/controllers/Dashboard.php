@@ -9,9 +9,9 @@ class Dashboard extends CI_Controller {
 		
 		$data['judul'] = "Dashboard";
 
-		$this->load->view('templates/header', $data, FALSE);
-		$this->load->view('dashboard', $data, FALSE);
-		$this->load->view('templates/footer', $data, FALSE);
+		$this->load->view('templates/header', $data);
+		$this->load->view('dashboard', $data);
+		$this->load->view('templates/footer', $data);
 	}
 
 	public function SetYear() {

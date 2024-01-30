@@ -41,16 +41,16 @@ class Auth extends CI_Controller {
 
 					$this->session->set_userdata($session);
 
-					redirect('dashboard','refresh');
+					redirect('dashboard');
 					
 				} else {
 					$this->session->set_flashdata('error', 'Password anda salah');
-					redirect('login','refresh');
+					redirect('login');
 				}
 				
 			} else{
 				$this->session->set_flashdata('error', 'Email tidak ditemukan');
-				redirect('login','refresh');
+				redirect('login');
 			}
 		}
 
@@ -60,7 +60,7 @@ class Auth extends CI_Controller {
 	public function logout($value='') {
 		session_unset();
 		session_destroy();
-		redirect('login','refresh')->deleteCookie('auth');
+		redirect('login')->deleteCookie('auth');
 	}
 
 	private function _send_email($token, $email)
