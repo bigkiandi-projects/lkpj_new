@@ -3,9 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
 
+	function __construct()  {
+        parent::__construct();
+        $this->load->model(array('capaian/Capaian_model', 'opd/Opd_model', 'bidang/Bidang_model', 'penjadwalan/Penjadwalan_model'));
+    }
+
 	public function index()
 	{
 		cek_login();
+
+		$getOpd = $this->Opd_model->get_all();
+        foreach($getOpd as $op) {
+            $hsl[] = $op->kdOpd; 
+        }
+
+        $non = array("X.XX");
+        $kdUr = array_merge($non, $hsl);
+        $th = $this->session->userdata('ta');
+
+        $data['rk'] = $this->Capaian_model->get_rekap_opd($kdUr, $th);
 		
 		$data['judul'] = "Dashboard";
 

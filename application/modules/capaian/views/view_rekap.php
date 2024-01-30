@@ -17,6 +17,7 @@ function displayUserTable($data) {
 
 }
 
+
 function countAccounts($banks) {
     $count = 0;
     foreach ($banks as $bank) {
@@ -47,6 +48,7 @@ function countRates($banks) {
     return $count;
 }
 
+
 function countRatesInRange($banks, $min, $max) {
     $count = 0;
     foreach ($banks as $bank) {
@@ -62,7 +64,6 @@ function countRatesInRange($banks, $min, $max) {
     }
     return $count;
 }
-
 
 
 ?>
@@ -113,7 +114,6 @@ function countRatesInRange($banks, $min, $max) {
 
                     </table>
                 </div>
-
                  
             </div>
         </div>
