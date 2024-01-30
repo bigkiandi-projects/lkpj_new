@@ -67,7 +67,7 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body text-center">
-        <h4>GRAFIK PERSENTASE PROGRES PENYUSUNAN CAPAIAN KINERJA</h4>
+        <h4>GRAFIK PERSENTASE PROGRES PENYUSUNAN LAPORAN CAPAIAN KINERJA</h4>
         <h4>PER / OPD <?= $this->session->userdata('ta') ?></h4>
 
         <div id="progres"></div>
