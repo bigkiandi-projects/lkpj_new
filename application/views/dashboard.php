@@ -51,7 +51,7 @@
           <div class="box box-default">
             <div class="box-body">
               <div>
-                <h2>1.233.000.569</h2>
+                <h2>0</h2>
                 <h4 class="text-green">Pagu</h4>
               </div>
             </div>
@@ -296,15 +296,15 @@ chart.data = [
     },
     {
       "opd": "DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU",
-      "prog": 91
+      "prog": 0
     },
     {
       "opd": "BADAN PENANGGULANGAN BENCANA DAERAH",
-      "prog": 11
+      "prog": 0
     },
     {
       "opd": "DINAS PPPA, PENGENDALIAN PENDUDUK DAN KELUARGA BERENCANA",
-      "prog": 12
+      "prog": 0
     }
   ]
 
