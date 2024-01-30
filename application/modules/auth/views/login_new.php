@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="elkpj-sbbkab.com" />
   <meta property="og:title" content="elkpj - Kabupaten Seram Bagian Barat" />
   <meta property="og:image" content="<?= base_url('assets/img/og-logo.jpg') ?>" />
-  <meta property="og:description" content="Sistem penyusunan laporan pertanggungjawaban bupati terintegrasi secara elektronik E-LKPJ" />
+  <meta property="og:description" content="Sistem Penyusunan Laporan Pertanggungjawaban Bupati Terintegrasi Secara Elektronik (E-LKPJ). Pemerintah Kabupaten Seram Bagian Barat." />
   <meta property="og:url" content="<?php echo base_url() ?>" />
 
         
