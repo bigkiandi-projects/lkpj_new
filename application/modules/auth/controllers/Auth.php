@@ -9,9 +9,9 @@ use PHPMailer\PHPMailer\SMTP;
 class Auth extends CI_Controller {
 
 	public function index() {
-		// if ($this->session->userdata('login')) {
-		// 	redirect('dashboard','refresh');
-		// }
+		if ($this->session->userdata('login')) {
+			redirect('dashboard','refresh');
+		}
 
 		$valid = $this->form_validation;
 
