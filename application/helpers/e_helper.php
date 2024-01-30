@@ -3,9 +3,9 @@
 function cek_login()
 {
 	$ci = get_instance();
-	// if ($ci->session->userdata('masuk') !== true) {
-	// 	redirect('login');
-	// } else {
+	if ($ci->session->userdata('masuk') !== true) {
+		redirect('login');
+	} else {
 
 		$id_role = $ci->session->userdata('id_role');
 		$menu = $ci->db->get_where('menu', ['url' => $ci->uri->segment(1) ])->row_array();
@@ -33,7 +33,7 @@ function cek_login()
 				die('401 Unauthorized');
 			}
 		}
-	// }
+	}
 }
 
 
