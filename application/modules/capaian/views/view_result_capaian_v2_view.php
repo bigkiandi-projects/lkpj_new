@@ -94,8 +94,8 @@ function fetch_prog($cp, $kdOpd) {
                 <td style="display: none;"></td>
                 <td style="display: none;"></td>
                 <td style="display: none;"></td>';
-        echo    "<td class='prg text-right' id='".$prg->kd."' data-opd='".$kdOpd."'>A</td>";
-        echo    "<td class='prg2 text-right' id='".$prg->kd."' data-opd2='".$kdOpd."'>R</td>";
+        echo    "<td class='prg text-right' id='".$prg->idCapai."' data-opd='".$kdOpd."'>A</td>";
+        echo    "<td class='prg2 text-right' id='".$prg->idCapai."' data-opd2='".$kdOpd."'>R</td>";
         echo    "<td class='prg_persen text-right'>P</td>
                 <td style='display: none;'></td>
                 <td></td>
@@ -105,7 +105,7 @@ function fetch_prog($cp, $kdOpd) {
 
         if(!empty($prg->sub)){
 
-            fetch_keg($prg->sub, $prg->kd);
+            fetch_keg($prg->sub, $prg->idCapai);
         }
 
     }
@@ -374,7 +374,7 @@ $find = cariObjek($opdd, $cariString);
     });
 
     // hitung nilai alokasi kegiatan ke program
-    $('.prg').each(function(){
+    $('.prg').each(function() {
         var ab = $(this).attr('id');
         var ttl =0;
 
