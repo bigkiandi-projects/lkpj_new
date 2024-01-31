@@ -18,11 +18,11 @@ class Opd extends CI_Controller
             $start = intval($this->input->get('start'));
 
             if ($q <> '') {
-                $config['base_url'] = base_url() . 'opd/index.html?q=' . urlencode($q);
-                $config['first_url'] = base_url() . 'opd/index.html?q=' . urlencode($q);
+                $config['base_url'] = base_url() . 'opd/index.aspx?q=' . urlencode($q);
+                $config['first_url'] = base_url() . 'opd/index.aspx?q=' . urlencode($q);
                 } else {
-                    $config['base_url'] = base_url() . 'opd/index.html';
-                    $config['first_url'] = base_url() . 'opd/index.html';
+                    $config['base_url'] = base_url() . 'opd/aspx.html';
+                    $config['first_url'] = base_url() . 'opd/aspx.html';
                 }
 
                 $config['per_page'] = 10;
