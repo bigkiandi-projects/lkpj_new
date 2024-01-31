@@ -525,7 +525,7 @@ function fetch_subkeg($cp){
 
     $(document).ready(function(){
         $('#myModal').on('shown.bs.modal', function (event) {
-            $('.uang').mask('000.000.000.000.000', {reverse: true});
+            $('.uang').mask('000.000.000.000.000,00', {reverse: true});
         });
     });
 
