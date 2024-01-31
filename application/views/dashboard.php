@@ -246,7 +246,7 @@ function countReal_fisik($banks) {
               </thead>
 
               <tbody>
-                  <?php hitungProgres($rk); ?>
+                  <?php number_format(hitungProgres($rk), 2, ',', '.'); ?>
               </tbody>
 
               </table>
