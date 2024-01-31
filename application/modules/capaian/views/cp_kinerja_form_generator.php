@@ -49,12 +49,15 @@
                         </tr>
 
                         <tr>
-                            <td style="background-color:#F5F5DC;"><b>Centang Untuk Input Non-Urusan</b></td>
+                            <td style="background-color:#F5F5DC;"><b>Bidang Lainnya</b></td>
                             <td>
-                                <div class="form-group">
-                                    <input type="checkbox" name="ur" value="X.XX">
-                                    <label>Non Urusan</label>
-                                </div>
+                                <?php foreach($bidang_add as $s) { ?>
+                                    <div class="form-group">
+                                        <input type="checkbox" name="ur" value="<?= $s->kode_bidang ?>">
+                                        <label><?= $s->nama_bidang ?></label>
+                                    </div>
+                                <?php } ?>
+                                <p class="text-danger"><i class="fas fa-info-circle"></i> centang jika ingin menambahkan program/keg/sub kegiatan untuk non urusan dan bidang sebagaimana tertera.</p>
                             </td>
                         </tr>
 

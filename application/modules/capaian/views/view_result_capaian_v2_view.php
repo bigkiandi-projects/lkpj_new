@@ -51,8 +51,8 @@ function fetch_opd($cp){
                 <td style='display: none;'></td>
                 <td style='display: none;'></td>
                 <td style='display: none;'></td>";
-        echo    "<td class='al-opd text-right' id-opd='".$op->kdOpd."'>A</td>";
-        echo    "<td class='opd2 text-right' id-opd='".$op->kdOpd."'>R</td>";
+        echo    "<td class='al-opd text-right' id-opd='".$op->idOpd."'>A</td>";
+        echo    "<td class='opd2 text-right' id-opd='".$op->idOpd."'>R</td>";
         echo    "<td class='opd_persen text-right'>P</td>";
         echo    "<td style='display: none;'></td>";
         echo    "<td></td>
@@ -62,7 +62,7 @@ function fetch_opd($cp){
 
         if(!empty($op->sub)){
 
-            fetch_bid($op->sub, $op->kdOpd);
+            fetch_bid($op->sub, $op->idOpd);
         }
 
     }
@@ -261,7 +261,6 @@ $find = cariObjek($opdd, $cariString);
                     </table>
                 </div>
 
-
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%;">
                         <thead>
@@ -336,6 +335,7 @@ $find = cariObjek($opdd, $cariString);
     $(document).ready(function () {
         $('#example').DataTable({
             "ordering": false,
+            "paging" : false,
             "columnDefs" : [{
                 "targets": '_all',
                 "createdCell": function (td, cellData, rowData, row, col) {
@@ -348,6 +348,7 @@ $find = cariObjek($opdd, $cariString);
     $(document).ready(function () {
         $('#example2').DataTable({
             "ordering": false,
+            "paging" : false,
             "columnDefs" : [{
                 "targets": '_all',
                 "createdCell": function (td, cellData, rowData, row, col) {

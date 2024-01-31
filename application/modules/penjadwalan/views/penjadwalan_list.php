@@ -57,7 +57,11 @@
                         <tr>
                             <td style="background-color:#F5F5DC;"><b>Opsi</b> <small class="text-red">*</small></td>
                             <td>
-                                <button type="submit" class="btn btn-primary btn-flat">Simpan</button>
+                                <?php if(empty($penjadwalan_data)) { ?>
+                                    <button type="submit" class="btn btn-primary btn-flat">Simpan</button>
+                                <?php } else { ?>
+                                    <p class="text-yellow">Data Penjadwalan sudah ada. Jika ingin merubah data, silahkan hapus jadwal sebelumnya terlebih dahulu.</p>
+                                <?php } ?>
                             </td>
                         </tr>
                     </table>
@@ -72,6 +76,7 @@
                         <th>No</th>
                 		<th>Tgl Mulai</th>
                 		<th>Tgl Selesai</th>
+                        <th>Durasi</th>
                         <th>Tahun LKPJ</th>
                 		<th>Status</th>
                 		<th>Action</th>
@@ -82,6 +87,15 @@
                     			<td><?php echo ++$start ?></td>
                     			<td><?php echo date('d M Y H:i:s', strtotime($penjadwalan->tgl_mulai)); ?></td>
                     			<td><?php echo date('d M Y H:i:s', strtotime($penjadwalan->tgl_selesai)); ?></td>
+                                <td><?php
+
+                                        $date1=date_create($penjadwalan->tgl_mulai);
+                                        $date2=date_create($penjadwalan->tgl_selesai);
+                                        $diff=date_diff($date1,$date2);
+                                        echo $diff->d." Hari";
+
+                                    ?>
+                                </td>
                                 <td><?= $penjadwalan->tahun ?></td>
                     			<td><?= $penjadwalan->message ?></td>
                                 <td>

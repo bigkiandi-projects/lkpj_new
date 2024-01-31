@@ -42,6 +42,7 @@
     $('.datepicker').datepicker({
       autoclose: true,
       format: "dd MM yyyy",
+      orientation: 'bottom',
     });
 </script>
 </body>

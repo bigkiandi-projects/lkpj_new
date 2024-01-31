@@ -67,7 +67,7 @@ function hitungPersentase($nilai, $total) {
     // Pastikan total tidak nol untuk menghindari pembagian dengan nol
     if ($total != 0) {
         $persentase = ($nilai / $total) * 100;
-        return $persentase;
+        return number_format($persentase, 2, '.', ',');
     } else {
         // Total nol, tetapi jika nilai juga nol, persentase adalah 0%
         return ($nilai == 0) ? 0 : null;
@@ -157,7 +157,7 @@ function countReal_fisik($banks) {
     }
     return $target;
 }
- $realisasinya = number_format(hitungRealKeu($rk));
+ $realisasinya = hitungRealKeu($rk);
 ?>
 
 <script src="//cdn.amcharts.com/lib/4/core.js"></script>
@@ -246,7 +246,7 @@ function countReal_fisik($banks) {
               </thead>
 
               <tbody>
-                  <?php number_format(hitungProgres($rk), 2, ',', '.'); ?>
+                  <?= hitungProgres($rk); ?>
               </tbody>
 
               </table>
@@ -306,7 +306,7 @@ var chart = am4core.createFromConfig({
   // Add hands
   "hands": [{
     "type": "ClockHand",
-    "value": <?= number_format(hitungFisik($rk)); ?>,
+    "value": <?= hitungFisik($rk) ?>,
     "fill": "#2D93AD",
     "stroke": "#2D93AD",
     "innerRadius": "30%",
@@ -324,7 +324,7 @@ label.isMeasured = false;
 label.fontSize = 25;
 label.horizontalCenter = "middle";
 label.verticalCenter = "bottom";
-label.text = <?= number_format(hitungFisik($rk)); ?>+"%";
+label.text = <?= hitungFisik($rk) ?>;
 </script>
 
 <script type="text/javascript">
@@ -393,6 +393,6 @@ label.isMeasured = false;
 label.fontSize = 25;
 label.horizontalCenter = "middle";
 label.verticalCenter = "bottom";
-label.text = <?= $realisasinya ?>+"%";
+label.text = <?= $realisasinya ?>;
 
 </script>

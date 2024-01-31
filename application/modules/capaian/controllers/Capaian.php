@@ -12,7 +12,7 @@ class Capaian extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Capaian_model', 'opd/Opd_model', 'bidang/Bidang_model', 'penjadwalan/Penjadwalan_model'));
+        $this->load->model(array('Capaian_model', 'opd/Opd_model', 'bidang/Bidang_model', 'bidang_add/Bidang_add_model', 'penjadwalan/Penjadwalan_model'));
         $this->load->library(array('form_validation', 'Jadwal'));
     }
 
@@ -21,6 +21,7 @@ class Capaian extends CI_Controller {
         $data = array(
         'opd' => $this->Opd_model->get_all(),
         'bidang' => $this->Bidang_model->get_all(),
+        'bidang_add' => $this->Bidang_add_model->get_all(),
         );
 
         $data['judul'] = 'Generator';
@@ -127,12 +128,14 @@ class Capaian extends CI_Controller {
 
     public function result_form() {
         $status = $this->jadwal->check_jadwal();
+        $bidang_add = $this->Bidang_add_model->get_bid_ad();
+
         if(isset($status->status_code) == 1) {
-            $getkdUr = $this->input->get('opd');
+            $getkdUr = array($this->input->get('opd'));
             $getIdOpd = $this->input->get('idOpd');
 
             $th = $this->input->get('tahun');
-            $kdUr = array("X.XX", $getkdUr);
+            $kdUr = array_merge($bidang_add , $getkdUr);
 
             $data['nmOpd'] = $this->input->get('namaOpd');
             $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
@@ -212,6 +215,8 @@ class Capaian extends CI_Controller {
     }
 
     public function view_result_v2() {
+        $bidang_add = $this->Bidang_add_model->get_bid_ad();
+
         if($this->session->userdata('level') == 'Opd') {
             $data['opdd'] = $this->Opd_model->get_all();
             // String yang ingin dicari
@@ -220,33 +225,33 @@ class Capaian extends CI_Controller {
             // Memanggil fungsi untuk mencari objek
             $find = $this->cariObjek($data['opdd'], $cariString);
 
-            $getkdUr = $find->kdOpd;
+            $getkdUr = array($find->kdOpd);
             $getIdOpd = $find->idOpd;
 
             $th = $this->session->userdata('ta');
-            $kdUr = array("X.XX", $getkdUr);
+            $kdUr = array_merge($bidang_add , $getkdUr);
 
             $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
 
         } else {
-            if($this->input->get('opd')) {
+            if($this->input->get('opd') != 1 && $this->input->get('opd') != null) {
 
-                $getkdUr = $this->input->get('opd');
+                $getkdUr = array($this->input->get('opd'));
                 $getIdOpd = $this->input->get('idOpd');
 
                 $th = $this->input->get('ta');
-                $kdUr = array("X.XX", $getkdUr);
+                $kdUr = array_merge($bidang_add , $getkdUr);
 
                 $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
                 $data['opdd'] = $this->Opd_model->get_all();
             } else {
+
                 $getOpd = $this->Opd_model->get_all();
                 foreach($getOpd as $op) {
                     $hsl[] = $op->kdOpd; 
                 }
 
-                $non = array("X.XX");
-                $kdUr = array_merge($non, $hsl);
+                $kdUr = array_merge($bidang_add, $hsl);
                 $th = $this->session->userdata('ta');
 
                 $data['cp'] = $this->Capaian_model->get_all_opd($kdUr, $th);
@@ -272,12 +277,13 @@ class Capaian extends CI_Controller {
     }
 
     public function rekapitulasi() {
+
         $getOpd = $this->Opd_model->get_all();
         foreach($getOpd as $op) {
             $hsl[] = $op->kdOpd; 
         }
 
-        $non = array("X.XX");
+        $non = $this->Bidang_add_model->get_bid_ad();
         $kdUr = array_merge($non, $hsl);
         $th = $this->session->userdata('ta');
 

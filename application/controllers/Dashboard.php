@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	function __construct()  {
         parent::__construct();
-        $this->load->model(array('capaian/Capaian_model', 'opd/Opd_model', 'bidang/Bidang_model', 'penjadwalan/Penjadwalan_model'));
+        $this->load->model(array('capaian/Capaian_model', 'opd/Opd_model', 'bidang_add/Bidang_add_model', 'bidang/Bidang_model', 'penjadwalan/Penjadwalan_model'));
     }
 
 	public function index()
@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller {
             $hsl[] = $op->kdOpd; 
         }
 
-        $non = array("X.XX");
+        $non = $this->Bidang_add_model->get_bid_ad();
         $kdUr = array_merge($non, $hsl);
         $th = $this->session->userdata('ta');
 

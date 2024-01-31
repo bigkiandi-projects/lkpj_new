@@ -15,6 +15,7 @@ class Penjadwalan extends CI_Controller
     public function index()
         {
             $data_opd = $this->User_model->get_user_ar();
+            
             $q = urldecode($this->input->get('q', TRUE));
             $start = intval($this->input->get('start'));
 
