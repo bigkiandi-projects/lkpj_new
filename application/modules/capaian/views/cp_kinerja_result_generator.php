@@ -85,7 +85,7 @@ function fetch_subkeg($prog){
 
         echo    "<td style='width: 7%;'>".$sk->kdSubkeg."</td>";
         echo    "<td>".$sk->nmSubkeg."</td>";
-        echo    "<td>".$sk->kinerja."</td>";
+        echo    "<td>".$sk->indikator."</td>";
         echo    "<td>".$sk->satuan."</td>";
 
         echo "</tr>";
