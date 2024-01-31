@@ -21,8 +21,8 @@ class Opd extends CI_Controller
                 $config['base_url'] = base_url() . 'opd/index.aspx?q=' . urlencode($q);
                 $config['first_url'] = base_url() . 'opd/index.aspx?q=' . urlencode($q);
                 } else {
-                    $config['base_url'] = base_url() . 'opd/aspx.html';
-                    $config['first_url'] = base_url() . 'opd/aspx.html';
+                    $config['base_url'] = base_url() . 'opd/index.aspx';
+                    $config['first_url'] = base_url() . 'opd/index.aspx';
                 }
 
                 $config['per_page'] = 10;
