@@ -165,6 +165,32 @@ class Capaian extends CI_Controller {
        $this->load->view('capaian/modal_content', $data);
     }
 
+    public function edit_indikator($id) {
+       $get_data = $this->Capaian_model->get_by_id($id);
+       if($get_data) {
+            $data['result'] = $get_data;
+            $data['id'] = $id;
+       } else {
+            $data['result'] = 'No Data Were Found';
+       }
+
+       // Mengembalikan data dalam bentuk view
+       $this->load->view('capaian/modal_indikator', $data);
+    }
+
+    public function save_edit_indikator($id) {
+        $data = array(  
+                        'indikator' => $this->input->post('indikator'),
+                    );
+        if($this->Capaian_model->update($id, $data)) {
+            $this->session->set_flashdata('success', 'Data Berhasil Disimpan');
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            $this->session->set_flashdata('error', 'Operation TimeOut. Gagal menyimpan Data');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+
 
     public function save_edit_cp($id) {
         $al = str_replace(".", "", $this->input->post('alokasi_ang'));

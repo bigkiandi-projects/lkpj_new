@@ -19,7 +19,7 @@
                                 <td width="30" style="background-color:#F5F5DC;"><b>Organisasi Perangkat Daerah</b> <small class="text-red">*</small></td>
                                 <td>
                                     <div class="form-group">
-                                        <select class="form-control" name="opd" id="opd">
+                                        <select class="form-control select2" name="opd" id="opd">
                                             <option disabled selected>---</option>
                                             <?php foreach($opd as $a) { ?>
                                                 <option value="<?= $a->kdOpd ?>" data-nama="<?= $a->nmOpd ?>" data-id="<?= $a->idOpd ?>"><?= $a->kdOpd." ".$a->nmOpd ?></option>

@@ -99,12 +99,21 @@ function fetch_prog($cp, $kdOpd) {
                 <td></td>
                 <td></td>
                 <td></td>";
+
+        if($_SESSION['level'] == 'Opd') {
         echo    "<td width='70'>
                     <div class='btn-group'>
-                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#kegmodal' data-url='".base_url('capaian/edit_cp/').$prg->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$prg->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                    </div>
+                </td>";
+        } else {
+        echo    "<td width='70'>
+                    <div class='btn-group'>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$prg->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
                         <a data-href='".base_url('capaian/hapus_cp/').$prg->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
                     </div>
                 </td>";
+        }
         echo    "</tr>";
 
         if(!empty($prg->sub)){
@@ -135,12 +144,20 @@ function fetch_keg($cp, $kd){
                 <td></td>
                 <td></td>
                 <td></td>";
+        if($_SESSION['level'] == 'Opd') {
         echo    "<td width='70'>
                     <div class='btn-group'>
-                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#kegmodal' data-url='".base_url('capaian/edit_cp/').$kgt->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$kgt->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                    </div>
+                </td>";
+        } else {
+        echo    "<td width='70'>
+                    <div class='btn-group'>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$kgt->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
                         <a data-href='".base_url('capaian/hapus_cp/').$kgt->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
                     </div>
                 </td>";
+        }
         echo    "</tr>";
 
         if(!empty($kgt->sub)){
@@ -170,13 +187,21 @@ function fetch_subkeg($cp){
         echo    "<td>".$sk->permasalahan."</td>";
         echo    "<td>".$sk->upaya."</td>";
         echo    "<td>".$sk->tl."</td>";
+        if($_SESSION['level'] == 'Opd') {
         echo    "<td width='70'>
-                <div class='btn-group'>
-                    <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#myModal' data-url='".base_url('capaian/edit_cp/').$sk->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
-                    <a data-href='".base_url('capaian/hapus_cp/').$sk->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
-                </div>
-            </td>
-        </tr>";
+                    <div class='btn-group'>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#myModal' data-url='".base_url('capaian/edit_cp/').$sk->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                    </div>
+                </td>";
+        } else {
+        echo    "<td width='70'>
+                    <div class='btn-group'>
+                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#myModal' data-url='".base_url('capaian/edit_cp/').$sk->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
+                        <a data-href='".base_url('capaian/hapus_cp/').$sk->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
+                    </div>
+                </td>";
+        }
+        echo "</tr>";
 
     }
 
@@ -285,6 +310,25 @@ function fetch_subkeg($cp){
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
                                 <button type="submit" form="myform" class="btn btn-primary">Simpan Perubahan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal modal-default modal-md fade" id="indimodal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-gray">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Form Update Indikator Kinerja</h4>
+                            </div>
+                            <div class="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                                <button type="submit" form="formIndikator" class="btn btn-primary">Simpan Perubahan</button>
                             </div>
                         </div>
                     </div>
@@ -519,6 +563,13 @@ function fetch_subkeg($cp){
 
 
     $('#myModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Tombol yang memicu modal
+      var url = button.data('url'); // URL untuk memuat konten modal dari server
+      var modal = $(this);
+      modal.find('.modal-body').load(url);
+    });
+
+    $('#indimodal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // Tombol yang memicu modal
       var url = button.data('url'); // URL untuk memuat konten modal dari server
       var modal = $(this);
