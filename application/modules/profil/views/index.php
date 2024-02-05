@@ -29,7 +29,7 @@
                                       </div>
                                       <div class="form-group <?php if(form_error('nama_user')) echo 'has-error'?>">
                                          <label for="nama_user">Nama user</label>
-                                         <input type="text" id="nama_user" name="nama_user" class="form-control nama_user" placeholder="Nama user" value="<?php echo $profil['nama_user'] ?>">
+                                         <input type="text" id="nama_user" name="nama_user" class="form-control nama_user" placeholder="Nama user" value="<?php echo $profil['nama_user'] ?>" readonly>
                                          <?php echo form_error('nama_user', '<small style="color:red">','</small>') ?>
                                      </div>
                                      <div class="form-group <?php if(form_error('jk')) echo 'has-error'?>">

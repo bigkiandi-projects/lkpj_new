@@ -168,6 +168,7 @@ function fetch_subkeg($prog){
     $(document).ready(function () {
         $('#example').DataTable({
             "ordering": false,
+            "paging" : false,
             "columnDefs" : [{
                 "targets": '_all',
                 "createdCell": function (td, cellData, rowData, row, col) {
