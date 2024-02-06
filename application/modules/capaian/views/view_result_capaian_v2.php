@@ -100,20 +100,12 @@ function fetch_prog($cp, $kdOpd) {
                 <td></td>
                 <td></td>";
 
-        if($_SESSION['level'] == 'Opd') {
-        echo    "<td width='70'>
-                    <div class='btn-group'>
-                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$prg->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
-                    </div>
-                </td>";
-        } else {
         echo    "<td width='70'>
                     <div class='btn-group'>
                         <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$prg->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
                         <a data-href='".base_url('capaian/hapus_cp/').$prg->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
                     </div>
                 </td>";
-        }
         echo    "</tr>";
 
         if(!empty($prg->sub)){
@@ -144,20 +136,12 @@ function fetch_keg($cp, $kd){
                 <td></td>
                 <td></td>
                 <td></td>";
-        if($_SESSION['level'] == 'Opd') {
-        echo    "<td width='70'>
-                    <div class='btn-group'>
-                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$kgt->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
-                    </div>
-                </td>";
-        } else {
         echo    "<td width='70'>
                     <div class='btn-group'>
                         <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#indimodal' data-url='".base_url('capaian/edit_indikator/').$kgt->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
                         <a data-href='".base_url('capaian/hapus_cp/').$kgt->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
                     </div>
                 </td>";
-        }
         echo    "</tr>";
 
         if(!empty($kgt->sub)){
@@ -187,20 +171,12 @@ function fetch_subkeg($cp){
         echo    "<td>".$sk->permasalahan."</td>";
         echo    "<td>".$sk->upaya."</td>";
         echo    "<td>".$sk->tl."</td>";
-        if($_SESSION['level'] == 'Opd') {
-        echo    "<td width='70'>
-                    <div class='btn-group'>
-                        <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#myModal' data-url='".base_url('capaian/edit_cp/').$sk->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
-                    </div>
-                </td>";
-        } else {
         echo    "<td width='70'>
                     <div class='btn-group'>
                         <a class='btn btn-primary btn-flat btn-sm' data-toggle='modal' data-target='#myModal' data-url='".base_url('capaian/edit_cp/').$sk->idCapai."'><span class='glyphicon glyphicon-edit'></span></a>
                         <a data-href='".base_url('capaian/hapus_cp/').$sk->idCapai."' class='btn btn-danger btn-flat btn-sm hapus'><span class='glyphicon glyphicon-trash'></span></a>
                     </div>
                 </td>";
-        }
         echo "</tr>";
 
     }
