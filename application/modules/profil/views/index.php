@@ -28,10 +28,23 @@
                                           <?php echo form_error('id_user', '<small style="color:red">','</small>') ?>
                                       </div>
                                       <div class="form-group <?php if(form_error('nama_user')) echo 'has-error'?>">
-                                         <label for="nama_user">Nama user</label>
+                                         <label for="nama_user">Unit Kerja Organisasi</label>
                                          <input type="text" id="nama_user" name="nama_user" class="form-control nama_user" placeholder="Nama user" value="<?php echo $profil['nama_user'] ?>" readonly>
                                          <?php echo form_error('nama_user', '<small style="color:red">','</small>') ?>
                                      </div>
+
+                                     <div class="form-group <?php if(form_error('nama_operator')) echo 'has-error'?>">
+                                         <label for="nama_user">Nama Pegawai</label>
+                                         <input type="text" id="nama_operator" name="nama_operator" class="form-control nama_operator" placeholder="Nama Operator" value="<?php echo $profil['nama_operator'] ?>">
+                                         <?php echo form_error('nama_operator', '<small style="color:red">','</small>') ?>
+                                     </div>
+
+                                     <div class="form-group <?php if(form_error('nip')) echo 'has-error'?>">
+                                         <label for="nip">NIP</label>
+                                         <input type="text" id="nip" name="nip" class="form-control nip" placeholder="Nomor Induk Pegawai" value="<?php echo $profil['nip'] ?>">
+                                         <?php echo form_error('nip', '<small style="color:red">','</small>') ?>
+                                     </div>
+
                                      <div class="form-group <?php if(form_error('jk')) echo 'has-error'?>">
                                          <label for="jk">Jenis Kelamin</label><br>
                                          <select name="jk" id="jk" class="form-control">

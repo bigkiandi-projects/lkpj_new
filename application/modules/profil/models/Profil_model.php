@@ -7,6 +7,10 @@ class Profil_model extends CI_Model {
 	{
 		$data = [
 			'nama_user' => $post['nama_user'],
+
+			'nama_operator' => $post['nama_operator'],
+			'nip' => $post['nip'],
+
 			'jk' => $post['jk'],
 			'alamat' => $post['alamat'],
 			'telepon' => $post['telepon'],

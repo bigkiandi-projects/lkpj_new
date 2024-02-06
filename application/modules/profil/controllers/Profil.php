@@ -26,6 +26,10 @@ class profil extends MX_Controller {
 		$valid = $this->form_validation;
 
 		$valid->set_rules('nama_user', 'nama user', 'required');
+
+		$valid->set_rules('nama_operator', 'nama operator', 'required');
+		$valid->set_rules('nip', 'NIP', 'required');
+
 		$valid->set_rules('jk', 'jenis kelamin', 'required');
 		$valid->set_rules('id_user', 'ID user', 'required');
 		$valid->set_rules('alamat', 'alamat', 'required');
