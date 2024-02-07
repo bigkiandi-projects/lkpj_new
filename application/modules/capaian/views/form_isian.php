@@ -1,12 +1,13 @@
 <?php
 
     function cariObjek($array, $string) {
+        $equal = array();
         foreach ($array as $objek) {
-            if (strpos($objek->nmOpd, $string) !== false) {
-                return $objek;
+            if ($objek->nmOpd === $string) {
+                $equal[] = $objek;
             }
         }
-        return null;
+        return $equal;
     }
 
     // String yang ingin dicari
@@ -27,6 +28,7 @@
     	border:0.5px solid #c8c8c8;
   	}
 </style>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-default">
@@ -40,7 +42,6 @@
                 </div>
             </div>
             <div class="box-body">
-
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%">
                         <form method="get" action="<?= base_url('capaian/result_form') ?>">
@@ -50,10 +51,10 @@
                                     <div class="form-group">
                                         <?php if($this->session->userdata('level') == 'Opd') { ?>
                                         <select class="form-control" name="opd" readonly>
-                                            <option value="<?= $find->kdOpd ?>"><?= $find->kdOpd." ".$find->nmOpd ?></option>
+                                            <option value="<?= $find[0]->kdOpd ?>"><?= $find[0]->kdOpd." ".$find[0]->nmOpd ?></option>
                                         </select>
-                                        <input type="hidden" name="namaOpd" value="<?= $find->nmOpd ?>">
-                                        <input type="hidden" name="idOpd" value="<?= $find->idOpd ?>">
+                                        <input type="hidden" name="namaOpd" value="<?= $find[0]->nmOpd ?>">
+                                        <input type="hidden" name="idOpd" value="<?= $find[0]->idOpd ?>">
                                         <?php } else { ?>
                                         <select class="form-control" name="opd" id="opd">
                                             <option disabled selected>---</option>
