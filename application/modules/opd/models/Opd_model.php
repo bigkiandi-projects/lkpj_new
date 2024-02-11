@@ -22,6 +22,16 @@ class Opd_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    // get all
+    function get_opd_join()
+    {
+        $this->db->select('kdOpd, nmOpd, id_user');
+        $this->db->order_by('kdOpd', $this->order);
+        $this->db->from($this->table);
+        $this->db->join('user', 'opd.nmOpd=user.nama_user');
+        return $this->db->get()->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {

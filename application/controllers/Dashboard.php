@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
 		$this->session->set_userdata('ta', $th);
 
 		$this->session->set_flashdata('success', 'Di Rubah');
-        redirect(base_url('dashboard'));
+        redirect($_SERVER['HTTP_REFERER']);
 	}
 
 }

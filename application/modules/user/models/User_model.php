@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class user_model extends CI_Model {
 
+	// get data by id
+    function get_by_id($id) {
+        $this->db->where('id_user', $id);
+        return $this->db->get('user')->row();
+    }
+
 	public function get_user_json()
 	{
 		$this->datatables->select('id_user, nama_user, jk, alamat, telepon, email, gambar, nama_role, status');

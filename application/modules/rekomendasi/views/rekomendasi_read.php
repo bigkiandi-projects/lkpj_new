@@ -1,0 +1,32 @@
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="pull-left">
+                    <div class="box-title">
+                        <h4><?php echo $judul ?></h4>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div class="box-title">
+                        <a href="<?php echo base_url('rekomendasi') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                 <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                     <table class="table">
+	    <tr><td>Rekomendasi</td><td><?php echo $rekomendasi; ?></td></tr>
+	    <tr><td>Tindak Lanjut</td><td><?php echo $tindak_lanjut; ?></td></tr>
+	    <tr><td>Tujuan</td><td><?php echo $tujuan; ?></td></tr>
+	    <tr><td>Parent Id</td><td><?php echo $parent_id; ?></td></tr>
+	</table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
