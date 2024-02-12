@@ -178,6 +178,20 @@ function countReal_fisik($banks) {
 
 <div class="row">
 
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="info-card pull-left">
+                    <h4><i class="fas fa-poll"></i> <?php echo $judul ?> Monitoring Data</h4>
+                    <div class="info-app yellow">
+                        <i class="far fa-clock"></i>
+                        Status Data : <?= date('d M Y H:i') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body text-center">
