@@ -47,7 +47,7 @@
                                     <option value="<?= $find[0]->nmOpd ?>" data-value="<?= $find[0]->kdOpd ?>"><?= $find[0]->nmOpd ?></option>
                                 </select>
                                 <?php } else { ?>
-                                    <?php if(isset($uker)) { ?>
+                                    <?php if($button == 'Update') { ?>
                                         <select class="form-control select2" name="opd" id="opd">
                                             <option value="<?= $uker[0]->nmOpd ?>" data-value="<?= $uker[0]->kdOpd ?>"><?= $uker[0]->nmOpd ?></option>
                                         </select>
