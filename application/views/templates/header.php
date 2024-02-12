@@ -104,8 +104,8 @@ if (!$user) {
       <!-- Header Navbar -->
       <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="font-size: 35px; padding: 0px 0px 0px 3px;">
-          <i class="fas fa-angle-right"></i>
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <i class="fas fa-bars"></i>
         </a>
 
         
