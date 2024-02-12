@@ -43,9 +43,15 @@
                     	    <div class="form-group">
                                 <label for="varchar">Unit Kerja</label>
                                 <?php if($this->session->userdata('level') == 'Opd') { ?>
-                                <select class="form-control select2" name="opd" id="opd">
-                                    <option value="<?= $find[0]->nmOpd ?>" data-value="<?= $find[0]->kdOpd ?>"><?= $find[0]->nmOpd ?></option>
-                                </select>
+                                    <?php if($button == 'Create') { ?>
+                                        <select class="form-control select2" name="opd" id="opd">
+                                            <option value="<?= $find[0]->nmOpd ?>" data-value="<?= $find[0]->kdOpd ?>"><?= $find[0]->nmOpd ?></option>
+                                        </select>
+                                    <?php } else { ?>
+                                        <select class="form-control select2" name="opd" id="opd">
+                                            <option value="<?= $uker[0]->nmOpd ?>" data-value="<?= $uker[0]->kdOpd ?>"><?= $uker[0]->nmOpd ?></option>
+                                        </select>
+                                    <?php } ?>
                                 <?php } else { ?>
                                     <?php if($button == 'Update') { ?>
                                         <select class="form-control select2" name="opd" id="opd">
