@@ -257,7 +257,7 @@ function xbid($cp) {
 
     // Simpan file spreadsheet dengan perubahan yang baru saja Anda buat
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    $writer->save('./assets/upload/file_spreadsheet_updated.xlsx');
+    $writer->save('./assets/upload/export/excel/test.xlsx');
 }
 
 function get_data($cp) {

@@ -153,7 +153,7 @@ class Narasi extends CI_Controller
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
-//penulisan header
+        //penulisan header
         header("Pragma: public");
         header("Expires: 0");
         header("Cache-Control: must-revalidate, post-check=0,pre-check=0");

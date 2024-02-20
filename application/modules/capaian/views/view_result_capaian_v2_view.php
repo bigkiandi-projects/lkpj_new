@@ -195,18 +195,26 @@ $find = cariObjek($opdd, $cariString);
         <div class="box box-dark">
             <div class="box-header with-border">
                 <div class="info-card">
-                    <h4><i class="fas fa-chart-line"></i> <?php echo $judul ?></h4>
+                    <h4><i class="fas fa-print"></i> <?php echo $judul ?></h4>
                     <div class="info-app yellow">
                         <i class="fas fa-info-circle"></i>
-                    Form Pengisian Data Capaian Kinerja. Mohon agar memperhatikan batas waktu pengisian sebagaimana tertera.
+                            Klik Tab di bawah untuk mencetak atau export data ke Excel.
                     </div>
                 </div>
             </div>
             <div class="box-body">
 
-            <div class="table-responsive">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="false"><span class="far fa-file"></span> Lihat Data</a></li>
+                  <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="true"><span class="far fa-file-excel"></span> Export Data</a></li>
+                </ul>
+            <div class="tab-content">
+            <div class="tab-pane active" id="activity">
+
+                <div class="table-responsive">
                     <table class="table table-bordered" width="100%">
-                        <form method="get" action="<?= base_url('capaian/view_result_v2') ?>">
+                        <form method="get" id="formView" action="<?= base_url('capaian/view_result_v2') ?>">
                         <tr>
                             <td width="30" style="background-color:#F5F5DC;"><b>Organisasi Perangkat Daerah</b> <small class="text-red">*</small></td>
                             <td>
@@ -219,11 +227,14 @@ $find = cariObjek($opdd, $cariString);
                                     <input type="hidden" name="idOpd" value="<?= $find->idOpd ?>">
                                     <?php } else { ?>
                                     <select class="form-control" name="opd" id="opd">
+                                        
                                         <option disabled selected>---</option>
+
                                         <option value="1">Semua OPD</option>
                                         <?php foreach($opdd as $a) { ?>
                                             <option value="<?= $a->kdOpd ?>" data-nama="<?= $a->nmOpd ?>" data-id="<?= $a->idOpd ?>"><?= $a->kdOpd." ".$a->nmOpd ?></option>
                                         <?php } ?>
+                                        
                                     </select>
                                     <input type="hidden" name="namaOpd" id="namaOpd">
                                     <input type="hidden" name="idOpd" id="idOpd">
@@ -242,22 +253,14 @@ $find = cariObjek($opdd, $cariString);
                         </tr>
 
                         <tr>
-                            <td style="background-color:#F5F5DC;">Opsi</td>
+                            <td style="background-color:#F5F5DC;"><b>Opsi</b></td>
                             <td>
-                                <a class="btn btn-success"><i class="far fa-file-excel"></i> Unduh Ke Excel</a>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Lihat Data</button>
                             </td>
                         </tr>
 
-                        <!-- <tr>
-                            <td style="background-color:#F5F5DC;">Import Data Dari File Excel</td>
-                            <td>
-                                <button class="btn btn-default" disabled><i class="fas fa-download"></i> Download Template</button>
-                                <button class="btn btn-primary" disabled><i class="fas fa-file-upload"></i> Import</button>
-                                <p class="text-warning">Fitur ini sedang dalam tahap pengembangan dan uji coba keamanan sistem</p>
-                            </td>
-                        </tr> -->
                     </form>
+
                     </table>
                 </div>
 
@@ -295,24 +298,64 @@ $find = cariObjek($opdd, $cariString);
                     </table>
                 </div>
 
-                <div class="modal modal-default modal-md fade" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-gray">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Form Pembaharuan Data</h4>
-                            </div>
-                            <div class="modal-body">
-                                
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                                <button type="submit" form="myform" class="btn btn-primary">Simpan Perubahan</button>
-                            </div>
-                        </div>
-                    </div>
+            </div> <!-- tab pane -->
+            <div class="tab-pane" id="timeline">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%">
+                        <form method="get" id="formExport" action="<?= base_url('capaian/import_excel') ?>">
+                        <tr>
+                            <td width="30" style="background-color:#F5F5DC;"><b>Organisasi Perangkat Daerah</b> <small class="text-red">*</small></td>
+                            <td>
+                                <div class="form-group">
+                                    <?php if($this->session->userdata('level') == 'Opd') { ?>
+                                    <select class="form-control" name="opd" id="opd2" readonly>
+                                        <option value="<?= $find->kdOpd ?>"><?= $find->kdOpd." ".$find->nmOpd ?></option>
+                                    </select>
+                                    <input type="hidden" name="namaOpd" value="<?= $find->nmOpd ?>">
+                                    <input type="hidden" name="idOpd" value="<?= $find->idOpd ?>">
+                                    <?php } else { ?>
+                                    <select class="form-control" name="opd" id="opd2">
+                                        
+                                        <option disabled selected>---</option>
+
+                                        <option value="1">Semua OPD</option>
+                                        <?php foreach($opdd as $a) { ?>
+                                            <option value="<?= $a->kdOpd ?>" data-nama2="<?= $a->nmOpd ?>" data-id2="<?= $a->idOpd ?>"><?= $a->kdOpd." ".$a->nmOpd ?></option>
+                                        <?php } ?>
+                                        
+                                    </select>
+                                    <input type="hidden" name="namaOpd" id="namaOpd2">
+                                    <input type="hidden" name="idOpd" id="idOpd2">
+                                    <?php } ?>
+                                </div>
+                            </td>
+                        </tr> 
+
+                        <tr>
+                            <td style="background-color:#F5F5DC;"><b>Tahun LKPJ</b> <small class="text-red">*</small></td>
+                            <td>
+                                <div class="form-group">
+                                    <input class="form-control" name="ta" type="text" value="<?= $this->session->userdata('ta') ?>" readonly>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="background-color:#F5F5DC;"><b>Opsi</b></td>
+                            <td>
+                                <button type="submit" class="btn btn-success"><i class="fas fa-file-excel"></i> Generate Data to Excel</button>
+                            </td>
+                        </tr>
+
+                    </form>
+
+                    </table>
                 </div>
+
+            </div> <!-- tab pane -->
+
+            </div>
+            </div>
 
             </div>
                  
@@ -330,6 +373,15 @@ $find = cariObjek($opdd, $cariString);
 
         $('#namaOpd').val(myTag);
         $('#idOpd').val(myId);
+    });
+
+    $("#opd2").change(function(){
+        var element = $("option:selected", this);
+        var myTag = element.attr("data-nama2");
+        var myId = element.attr("data-id2");
+
+        $('#namaOpd2').val(myTag);
+        $('#idOpd2').val(myId);
     });
 
     $(document).ready(function () {

@@ -471,6 +471,7 @@ class Capaian_model extends CI_Model
         return $categories;       
     }
 
+
 }
 
 /* End of file Capaian_model.php */

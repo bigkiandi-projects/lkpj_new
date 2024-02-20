@@ -7,6 +7,9 @@ require ('./vendor/autoload.php');
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class Capaian extends CI_Controller {
     function __construct()
@@ -260,7 +263,7 @@ class Capaian extends CI_Controller {
             $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
 
         } else {
-            if($this->input->get('opd') != 1 && $this->input->get('opd') != null) {
+            if($this->input->get('opd') != 1) {
 
                 $getkdUr = array($this->input->get('opd'));
                 $getIdOpd = $this->input->get('idOpd');
@@ -322,29 +325,217 @@ class Capaian extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    // UPLOAD EXCEL
-    public function get_excel_import_format($data) {
-        // Lokasi file spreadsheet yang sudah ada
-        $file_path = './assets/upload/format-lkpj.xlsx';
 
-        // Baca file spreadsheet yang sudah ada
-        $spreadsheet = IOFactory::load($file_path);
+    public function import_excel() {
+        $bidang_add = $this->Bidang_add_model->get_bid_ad();
 
-        // Dapatkan lembar aktif (active sheet)
-        $sheet = $spreadsheet->getActiveSheet();
+        if($this->session->userdata('level') == 'Opd') {
+            $data['opdd'] = $this->Opd_model->get_all();
+            // String yang ingin dicari
+            $cariString = strtoupper($this->session->userdata('nama_user'));
 
-        foreach($data as $row) {
-            $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('C3', $row->idOpd)
-            ->setCellValue('C4', $row->nmOpd)
-            ->setCellValue('C5', $this->input->get('tahun'));
+            // Memanggil fungsi untuk mencari objek
+            $find = $this->cariObjek($data['opdd'], $cariString);
+
+            $getkdUr = array($find->kdOpd);
+            $getIdOpd = $find->idOpd;
+
+            $th = $this->session->userdata('ta');
+            $kdUr = array_merge($bidang_add , $getkdUr);
+
+            $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
+            $this->excel_go($data['cp'], $this->input->get('namaOpd'));
+
+        } else {
+            if($this->input->get('opd') != 1 && $this->input->get('opd') != null) {
+
+                $getkdUr = array($this->input->get('opd'));
+                $getIdOpd = $this->input->get('idOpd');
+
+                $th = $this->input->get('ta');
+                $kdUr = array_merge($bidang_add , $getkdUr);
+
+                $data['cp'] = $this->Capaian_model->get_view_opd($kdUr, $getIdOpd, $th);
+                $data['opdd'] = $this->Opd_model->get_all();
+                $this->excel_go($data['cp'], $this->input->get('namaOpd'));
+            } else {
+
+                $getOpd = $this->Opd_model->get_all();
+                foreach($getOpd as $op) {
+                    $hsl[] = $op->kdOpd; 
+                }
+
+                $kdUr = array_merge($bidang_add, $hsl);
+                $th = $this->session->userdata('ta');
+
+                $data['cp'] = $this->Capaian_model->get_all_opd($kdUr, $th);
+                $data['opdd'] = $this->Opd_model->get_all();
+
+                $this->excel_go($data['cp'], $this->input->get('namaOpd'));
+            }
         }
 
-        // Simpan file spreadsheet dengan perubahan yang baru saja Anda buat
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $writer->save('./assets/upload/file_spreadsheet_updated.xlsx');
+
+        $data['judul'] = 'Lihat/Cetak Data';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('capaian/view_result_capaian_v2_view', $data);
+        $this->load->view('templates/footer', $data);
     }
 
+    public function excel_go($cp, $nmOpd) {
+    if(!empty($nmOpd)) {
+        $opdnya = $nmOpd;
+    } else {
+        $opdnya = 'Semua OPD';
+    }
+    // Get Format
+    $file_path = './assets/upload/export/format.xlsx';
+
+    $file_loc = './assets/upload/export/excel/';
+
+    $filename = $opdnya.'.xlsx';
+
+    // Baca file spreadsheet yang sudah ada
+    $spreadsheet = IOFactory::load($file_path);
+    // Dapatkan lembar aktif (active sheet)
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Data yang ingin Anda tambahkan ke baris tertentu
+    $rowIndex = 4;
+
+    // Looping data users
+    foreach ($cp as $xopd) {
+        $sheet->setCellValue('A'.$rowIndex, $xopd->kdOpd);
+        $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
+
+        $sheet->setCellValue('B'.$rowIndex, $prog->kebijakan);
+
+        // $sheet->mergeCells('C'.$rowIndex.':'.'E'.$rowIndex);
+        $sheet->setCellValue('C'.$rowIndex, $xopd->nmOpd);
+        $sheet->getStyle('C'.$rowIndex)->getFont()->setSize(11)->setBold(true);
+
+        $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getFill()
+                ->setFillType(Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setARGB('9f9dca');
+
+        $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getBorders()
+                ->getAllBorders()
+                ->setBorderStyle(Border::BORDER_THIN)
+                ->setColor(new Color('666666'));
+
+        $rowIndex++;
+
+        foreach($xopd->sub as $bid) {
+
+            foreach($bid->sub as $prog) {
+
+                $sheet->setCellValue('A'.$rowIndex, $prog->kd);
+                $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
+
+                $sheet->setCellValue('B'.$rowIndex, $prog->kebijakan);
+
+                // $sheet->mergeCells('C'.$rowIndex.':'.'E'.$rowIndex);
+                $sheet->setCellValue('C'.$rowIndex, $prog->program);
+                $sheet->getStyle('C'.$rowIndex)->getFont()->setBold(true);
+
+                $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getFill()
+                        ->setFillType(Fill::FILL_SOLID)
+                        ->getStartColor()
+                        ->setARGB('bfbddc');
+
+                $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getBorders()
+                ->getAllBorders()
+                ->setBorderStyle(Border::BORDER_THIN)
+                ->setColor(new Color('666666'));
+
+                $rowIndex++;
+
+                foreach($prog->sub as $keg) {
+
+                    $sheet->setCellValue('A'.$rowIndex, $keg->kd);
+                    $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
+
+                    $sheet->setCellValue('B'.$rowIndex, $keg->kebijakan);
+
+                    // $sheet->mergeCells('C'.$rowIndex.':'.'E'.$rowIndex);
+                    $sheet->setCellValue('C'.$rowIndex, $keg->program);
+                    $sheet->getStyle('C'.$rowIndex)->getFont()->setBold(true);
+
+                    $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getFill()
+                        ->setFillType(Fill::FILL_SOLID)
+                        ->getStartColor()
+                        ->setARGB('dfdeed');
+
+                    $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getBorders()
+                        ->getAllBorders()
+                        ->setBorderStyle(Border::BORDER_THIN)
+                        ->setColor(new Color('666666'));
+
+                    $rowIndex++;
+
+                    foreach($keg->sub as $subkeg) {
+                        $sheet->setCellValue('A'.$rowIndex, $subkeg->kd);
+                        $sheet->setCellValue('B'.$rowIndex, $subkeg->kebijakan);
+                        $sheet->setCellValue('C'.$rowIndex, $subkeg->program);
+                        $sheet->setCellValue('D'.$rowIndex, $subkeg->indikator);
+                        $sheet->setCellValue('E'.$rowIndex, $subkeg->satuan);
+
+                        $sheet->setCellValue('F'.$rowIndex, $subkeg->target);
+                        $sheet->setCellValue('G'.$rowIndex, $subkeg->real_target);
+                        $pre = ($subkeg->target!=0)?($subkeg->real_target/$subkeg->target) * 100:0;
+                        $sheet->setCellValue('H'.$rowIndex, $pre);
+
+                        $sheet->setCellValue('I'.$rowIndex, $subkeg->alokasi_ang);
+                        $sheet->setCellValue('J'.$rowIndex, $subkeg->real_ang);
+                        $sheet->setCellValue('K'.$rowIndex, $subkeg->presentasi);
+
+                        $sheet->setCellValue('L'.$rowIndex, $subkeg->permasalahan);
+                        $sheet->setCellValue('M'.$rowIndex, $subkeg->upaya);
+                        $sheet->setCellValue('N'.$rowIndex, $subkeg->tl);
+
+                        $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getBorders()
+                        ->getAllBorders()
+                        ->setBorderStyle(Border::BORDER_THIN)
+                        ->setColor(new Color('666666'));
+
+                        $sheet->getStyle('F'.$rowIndex.':N'.$rowIndex)->getAlignment()
+                        ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+
+
+                        $rowIndex++;
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    // Simpan file spreadsheet dengan perubahan yang baru saja Anda buat
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save($file_loc.$filename);
+
+    ob_clean();
+    $writer = new Xlsx($spreadsheet);
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="'.$opdnya.'-'.date('d-M-Y hij').'.xlsx"');
+    $writer->save('php://output');
+    exit();
+
+    // $save_gen = array('gen_by' => $this->session->userdata('nama_user'),
+    //                   'gen_opd' => $nmOpd,
+    //                   'gen_file' => $file_loc.$filename
+    //                  );
+    // $this->Capaian_model->save_gen_data($save_gen);
+    }
+
+    function hapus_gen($id) {
+        $this->Capaian_model->hapus_gen_file($id);
+        $this->session->set_flashdata('success', 'Dihapus');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 
 
 
