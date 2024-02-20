@@ -314,9 +314,9 @@ $find = cariObjek($opdd, $cariString);
                                     <input type="hidden" name="namaOpd" value="<?= $find->nmOpd ?>">
                                     <input type="hidden" name="idOpd" value="<?= $find->idOpd ?>">
                                     <?php } else { ?>
-                                    <select class="form-control select2" name="opd" id="opd2">
+                                    <select class="form-control" name="opd" id="opd2">
                                         
-                                        <option disabled selected>---</option>
+                                        <option disabled selected></option>
 
                                         <option value="1">Semua OPD</option>
                                         <?php foreach($opdd as $a) { ?>
