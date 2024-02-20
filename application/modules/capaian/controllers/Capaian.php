@@ -409,7 +409,7 @@ class Capaian extends CI_Controller {
         $sheet->setCellValue('A'.$rowIndex, $xopd->kdOpd);
         $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
 
-        $sheet->setCellValue('B'.$rowIndex, $xopd->kebijakan);
+        $sheet->setCellValue('B'.$rowIndex, '');
 
         // $sheet->mergeCells('C'.$rowIndex.':'.'E'.$rowIndex);
         $sheet->setCellValue('C'.$rowIndex, $xopd->nmOpd);
