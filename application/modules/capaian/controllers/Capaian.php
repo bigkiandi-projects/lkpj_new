@@ -476,6 +476,7 @@ class Capaian extends CI_Controller {
                     $rowIndex++;
 
                     foreach($keg->sub as $subkeg) {
+
                         $sheet->setCellValue('A'.$rowIndex, $subkeg->kd);
                         $sheet->setCellValue('B'.$rowIndex, $subkeg->kebijakan);
                         $sheet->setCellValue('C'.$rowIndex, $subkeg->program);
@@ -494,6 +495,8 @@ class Capaian extends CI_Controller {
                         $sheet->setCellValue('L'.$rowIndex, $subkeg->permasalahan);
                         $sheet->setCellValue('M'.$rowIndex, $subkeg->upaya);
                         $sheet->setCellValue('N'.$rowIndex, $subkeg->tl);
+
+                        $sheet->getStyle('L'.$rowIndex.':N'.$rowIndex)->getAlignment()->setWrapText(true);
 
                         $sheet->getStyle('A'.$rowIndex.':N'.$rowIndex)->getBorders()
                         ->getAllBorders()
