@@ -3,6 +3,15 @@
 if (!defined('BASEPATH'))
 exit('No direct script access allowed');
 
+require ('./vendor/autoload.php');
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+
 class Narasi extends CI_Controller
 {
     function __construct()
@@ -147,46 +156,50 @@ class Narasi extends CI_Controller
     }
 
     public function excel() {
-        $this->load->helper('exportexcel');
-        $namaFile = "narasi.xls";
-        $judul = "narasi";
-        $tablehead = 0;
-        $tablebody = 1;
-        $nourut = 1;
-        //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
 
-        xlsBOF();
+        // Get Format
+        $file_path = './assets/upload/export/format-narasi.xlsx';
+        $filename = 'narasi';
 
-        $kolomhead = 0;
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-    	xlsWriteLabel($tablehead, $kolomhead++, "Unit Kerja");
-    	xlsWriteLabel($tablehead, $kolomhead++, "Urusan");
-    	xlsWriteLabel($tablehead, $kolomhead++, "Uraian Kegiatan");
+        // Baca file spreadsheet yang sudah ada
+        $spreadsheet = IOFactory::load($file_path);
+        // Dapatkan lembar aktif (active sheet)
+        $sheet = $spreadsheet->getActiveSheet();
 
-    	foreach ($this->Narasi_model->get_all() as $data) {
-            $kolombody = 0;
+        // Data yang ingin Anda tambahkan ke baris tertentu
+        $rowIndex = 4;
 
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-    	    xlsWriteLabel($tablebody, $kolombody++, $data->unit_kerja);
-    	    xlsWriteLabel($tablebody, $kolombody++, $data->urusan);
-    	    xlsWriteLabel($tablebody, $kolombody++, $data->uraian_kegiatan);
+    	foreach ($this->Narasi_model->get_all() as $a) {
+            $sheet->setCellValue('A'.$rowIndex, $a->kdOpd);
 
-    	    $tablebody++;
-            $nourut++;
+            $sheet->setCellValue('B'.$rowIndex, $a->unit_kerja);
+            $sheet->getStyle('A'.$rowIndex.':B'.$rowIndex)->getFont()->setBold(true);
+
+            $sheet->setCellValue('C'.$rowIndex, $a->urusan);
+            $sheet->setCellValue('D'.$rowIndex, $a->uraian_kegiatan);
+
+            $sheet->getStyle('A'.$rowIndex.':D'.$rowIndex)->getAlignment()->setWrapText(true);
+
+            $sheet->getStyle('A'.$rowIndex.':D'.$rowIndex)->getAlignment()
+                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+
+            $sheet->getStyle('A'.$rowIndex.':D'.$rowIndex)->getBorders()
+                    ->getAllBorders()
+                    ->setBorderStyle(Border::BORDER_THIN)
+                    ->setColor(new Color('666666'));
+
+            $rowIndex++;
         }
 
-        xlsEOF();
+        ob_clean();
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.$filename.'-'.date('d-M-Y hij').'.xlsx"');
+        $writer->save('php://output');
         exit();
     }
+
+
 
 }
 

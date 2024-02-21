@@ -8,7 +8,7 @@ class Narasi_model extends CI_Model
 
     public $table = 'narasi';
     public $id = 'id_narasi';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     function __construct()
     {
@@ -32,7 +32,9 @@ class Narasi_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
+        $this->db->where('tahun', $this->session->userdata('ta'));
+        $this->db->join('opd', 'narasi.unit_kerja = opd.nmOpd');
+        $this->db->order_by('opd.kdOpd', $this->order);
         return $this->db->get($this->table)->result();
     }
 

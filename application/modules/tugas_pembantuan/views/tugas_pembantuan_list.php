@@ -40,6 +40,7 @@
                 <div class="pull-right">
                     <div class="box-title">
                         <a href="<?php echo base_url('tugas_pembantuan/create') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                        <a href="<?php echo base_url('tugas_pembantuan/excel') ?>" class="btn btn-success"><i class="fas fa-sign-out-alt"></i> Export Excel</a>
                     </div>
                 </div>
 

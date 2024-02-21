@@ -103,6 +103,7 @@ function render_rekomendasi($data, $idOpd, $kdOpd, $nmOpd) {
                 <div class="pull-right">
                     <div class="box-title">
                         <a href="<?php echo base_url('rekomendasi/create') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                        <a href="<?php echo base_url('rekomendasi/excel') ?>" class="btn btn-success"><i class="fas fa-sign-out-alt"></i> Export Excel</a>
                     </div>
                 </div>
                 <div class="info-card">
@@ -131,7 +132,7 @@ function render_rekomendasi($data, $idOpd, $kdOpd, $nmOpd) {
                     </table>
 
                 </div>
-                 
+
             </div>
         </div>
     </div>

@@ -3,6 +3,15 @@
 if (!defined('BASEPATH'))
 exit('No direct script access allowed');
 
+require ('./vendor/autoload.php');
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+
 class Rekomendasi extends CI_Controller
 {
     function __construct()
@@ -149,60 +158,105 @@ class Rekomendasi extends CI_Controller
             }
     }
 
-                            public function _rules() 
-                            {
-	$this->form_validation->set_rules('rekomendasi', 'rekomendasi', 'trim|required');
-	$this->form_validation->set_rules('tindak_lanjut', 'tindak lanjut', 'trim|required');
-	$this->form_validation->set_rules('tujuan', 'tujuan', 'trim|required');
-	$this->form_validation->set_rules('parent_id', 'parent id', 'trim|required|numeric');
 
-	$this->form_validation->set_rules('id_rek', 'id_rek', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-                        }
+    public function excel() {
+        $get_urusan = $this->Rekomendasi_model->get_urusan($id_user = '');
 
-    public function excel()
-                            {
-                                $this->load->helper('exportexcel');
-                                $namaFile = "rekomendasi.xls";
-                                $judul = "rekomendasi";
-                                $tablehead = 0;
-                                $tablebody = 1;
-                                $nourut = 1;
-        //penulisan header
-                                header("Pragma: public");
-                                header("Expires: 0");
-                                header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-                                header("Content-Type: application/force-download");
-                                header("Content-Type: application/octet-stream");
-                                header("Content-Type: application/download");
-                                header("Content-Disposition: attachment;filename=" . $namaFile . "");
-                                header("Content-Transfer-Encoding: binary ");
+        // Get Format
+        $file_path = './assets/upload/export/format-rekomendasi-dprd.xlsx';
+        $filename = 'rekomendasi-dprd';
 
-                                xlsBOF();
+        // Baca file spreadsheet yang sudah ada
+        $spreadsheet = IOFactory::load($file_path);
+        // Dapatkan lembar aktif (active sheet)
+        $sheet = $spreadsheet->getActiveSheet();
 
-                                $kolomhead = 0;
-                                xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Rekomendasi");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tindak Lanjut");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tujuan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Parent Id");
+        // Data yang ingin Anda tambahkan ke baris tertentu
+        $rowIndex = 4;
 
-	foreach ($this->Rekomendasi_model->get_all() as $data) {
-                                    $kolombody = 0;
+        foreach ($get_urusan as $ur) {
+            $sheet->setCellValue('A'.$rowIndex, $ur->kode);
+            $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
 
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-                                    xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->rekomendasi);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tindak_lanjut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tujuan);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->parent_id);
+            $sheet->setCellValue('B'.$rowIndex, $ur->urusan);
+            $sheet->getStyle('B'.$rowIndex)->getFont()->setSize(11)->setBold(true);
+            $sheet->mergeCells('B'.$rowIndex.':'.'E'.$rowIndex);
 
-	    $tablebody++;
-                                    $nourut++;
-                                }
+            $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getFill()
+                    ->setFillType(Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('9f9dca');
 
-                                xlsEOF();
-                                exit();
+            $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getBorders()
+                    ->getAllBorders()
+                    ->setBorderStyle(Border::BORDER_THIN)
+                    ->setColor(new Color('666666'));
+
+            $rowIndex++;
+
+            foreach($ur->sub as $opd) {
+                $sheet->setCellValue('A'.$rowIndex, $opd->kode);
+                $sheet->getStyle('A'.$rowIndex)->getFont()->setBold(true);
+
+                $sheet->setCellValue('B'.$rowIndex, $opd->nama_user);
+                $sheet->getStyle('B'.$rowIndex)->getFont()->setSize(11)->setBold(true);
+                $sheet->mergeCells('B'.$rowIndex.':'.'E'.$rowIndex);
+
+                $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getFill()
+                        ->setFillType(Fill::FILL_SOLID)
+                        ->getStartColor()
+                        ->setARGB('dfdeed');
+
+                $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getBorders()
+                        ->getAllBorders()
+                        ->setBorderStyle(Border::BORDER_THIN)
+                        ->setColor(new Color('666666'));
+
+                $rowIndex++;
+
+                foreach($opd->sub as $rek) {
+                    $nm = 'a';
+                    $sheet->setCellValue('B'.$rowIndex, $nm++.'.');
+
+                    $sheet->setCellValue('C'.$rowIndex, $rek->rekomendasi);
+                    $sheet->setCellValue('D'.$rowIndex, $rek->tindak_lanjut);
+                    $sheet->setCellValue('E'.$rowIndex, $rek->tujuan);
+
+                    $sheet->getStyle('C'.$rowIndex.':E'.$rowIndex)->getAlignment()->setWrapText(true);
+
+                    $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getAlignment()
+                        ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
+
+                    $sheet->getStyle('A'.$rowIndex.':E'.$rowIndex)->getBorders()
+                            ->getAllBorders()
+                            ->setBorderStyle(Border::BORDER_THIN)
+                            ->setColor(new Color('666666'));
+
+                    $rowIndex++;
+                }
+
+            }
+
+        }
+
+        ob_clean();
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.$filename.'-'.date('d-M-Y hij').'.xlsx"');
+        $writer->save('php://output');
+        exit();
+
+    }
+
+                            public function _rules() {
+
+                            	$this->form_validation->set_rules('rekomendasi', 'rekomendasi', 'trim|required');
+                            	$this->form_validation->set_rules('tindak_lanjut', 'tindak lanjut', 'trim|required');
+                            	$this->form_validation->set_rules('tujuan', 'tujuan', 'trim|required');
+                            	$this->form_validation->set_rules('parent_id', 'parent id', 'trim|required|numeric');
+
+                            	$this->form_validation->set_rules('id_rek', 'id_rek', 'trim');
+                            	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
                             }
 
 }
